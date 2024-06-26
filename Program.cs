@@ -70,7 +70,7 @@ var orderedList = Repos.OrderBy(x => x.Path).ToList();
 foreach (var currRepo in orderedList)
 {
   if (!(currRepo.Path.Contains("("))) { continue; }
-  String md = " ";
-  for (var i = 0; i < currRepo.Level; i++) { md += " "; }
+  String md = "";
+  for (var i = 0; i < currRepo.Level; i++) { md += "  "; }
   Console.WriteLine($"{md}- {currRepo.Path}");
 }
