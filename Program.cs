@@ -10,8 +10,13 @@ var rootPath = args[0];
 int thisLevel = 0;
 List<Repo> Repos = [];
 
+var options = new EnumerationOptions
+            {
+                IgnoreInaccessible = true,
+                RecurseSubdirectories = true
+            };
 
-foreach (string fileName in Directory.EnumerateFiles(rootPath, ".gitmodules", SearchOption.AllDirectories))
+foreach (string fileName in Directory.EnumerateFiles(rootPath, ".gitmodules", options))
 {
   var relFilePath = Path.GetDirectoryName(fileName[rootPath.Length..]);
   if (relFilePath.Length > 1)
