@@ -74,8 +74,22 @@ var orderedList = Repos.OrderBy(x => x.Path).ToList();
 
 foreach (var currRepo in orderedList)
 {
-  if (!(currRepo.Path.Contains("("))) { continue; }
+  if (!(currRepo.Path.Contains("("))) {
+    if (currRepo.Level == 0)
+    {
+      // First level, show as heading
+      Console.WriteLine($"# {currRepo.Path}");
+    }
+    continue; 
+  }
   String md = "";
   for (var i = 0; i < currRepo.Level; i++) { md += "  "; }
-  Console.WriteLine($"{md}- {currRepo.Path}");
+  if (currRepo.Path.Contains(".com"))
+  {
+    // Italize anything that refers to .com repo
+    Console.WriteLine($"{md}- _{currRepo.Path}_");
+  } else
+  {
+    Console.WriteLine($"{md}- {currRepo.Path}");
+  }
 }
